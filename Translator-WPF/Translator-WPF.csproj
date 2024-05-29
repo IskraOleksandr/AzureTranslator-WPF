@@ -11,10 +11,12 @@
 
   <ItemGroup>
     <None Remove="icons8-microsoft-translator-48.png" />
+    <None Remove="volume.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="icons8-microsoft-translator-48.png" />
+    <Resource Include="volume.png" />
   </ItemGroup>
 
 </Project>

@@ -20,5 +20,6 @@ namespace Translator_WPF
         {
             InitializeComponent();
         }
+
     }
 }
