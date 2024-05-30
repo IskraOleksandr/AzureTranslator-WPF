@@ -121,46 +121,46 @@ namespace Translator_WPF
             return selectedItem.Lang;
         }
 
-       
 
-            async static Task<string> Translate(string textToTranslate, string from, string to)
+
+        async static Task<string> Translate(string textToTranslate, string from, string to)
+        {
+            // Input and output languages are defined as parameters.
+            string route = "/translate?api-version=3.0&from=" + from + "&to=" + to;
+
+
+            object[] body = new object[] { new { Text = textToTranslate } };
+            var requestBody = JsonConvert.SerializeObject(body);
+
+            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage())
             {
-                // Input and output languages are defined as parameters.
-                string route = "/translate?api-version=3.0&from=" + from + "&to=" + to;
+                request.Method = HttpMethod.Post;// Build the request.
+                request.RequestUri = new Uri(endpoint + route);
+                request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
+                request.Headers.Add("Ocp-Apim-Subscription-Key", translateKey);
+                request.Headers.Add("Ocp-Apim-Subscription-Region", location);// location required if you're using a multi-service or regional (not global) resource.
 
-
-                object[] body = new object[] { new { Text = textToTranslate } };
-                var requestBody = JsonConvert.SerializeObject(body);
-
-                using (var client = new HttpClient())
-                using (var request = new HttpRequestMessage())
-                {
-                    request.Method = HttpMethod.Post;// Build the request.
-                    request.RequestUri = new Uri(endpoint + route);
-                    request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-                    request.Headers.Add("Ocp-Apim-Subscription-Key", translateKey);
-                    request.Headers.Add("Ocp-Apim-Subscription-Region", location);// location required if you're using a multi-service or regional (not global) resource.
-
-                    HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);// Send the request and get response. 
-                    string result = await response.Content.ReadAsStringAsync();// Read response as a string. 
-                    return result;
-                }
+                HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);// Send the request and get response. 
+                string result = await response.Content.ReadAsStringAsync();// Read response as a string. 
+                return result;
             }
+        }
 
-            private void texboxlang1_TextChanged(object sender, TextChangedEventArgs e)
+        private void texboxlang1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (!string.IsNullOrEmpty(textBox.Text))
             {
-                TextBox textBox = sender as TextBox;
-                if (!string.IsNullOrEmpty(textBox.Text))
-                {
-                    btnTranslate.IsEnabled = true;
-                    btnClear.IsEnabled = true;
-                }
-                else
-                {
-                    btnTranslate.IsEnabled = false;
-                    btnClear.IsEnabled = false;
-                }
+                btnTranslate.IsEnabled = true;
+                btnClear.IsEnabled = true;
             }
-       
+            else
+            {
+                btnTranslate.IsEnabled = false;
+                btnClear.IsEnabled = false;
+            }
+        }
+
     }
-    }
+}
