@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.37.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="icons8-microsoft-translator-48.png" />
     <Resource Include="volume.png" />
   </ItemGroup>

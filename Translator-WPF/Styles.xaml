@@ -22,12 +22,17 @@
                             <Setter TargetName="border" Property="Background" Value="#0a49a2"/>
                             <!--<Setter Property="Foreground" Value="Black"/>-->
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#526580"/>
+                            <!--<Setter Property="Foreground" Value="Black"/>-->
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
+   
+    
     <Style TargetType="TextBox">
         <Setter Property="Template">
             <Setter.Value>
